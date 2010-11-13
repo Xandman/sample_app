@@ -48,4 +48,12 @@ describe User do
     user_with_duplicate.should_not be_valid
     
   end
+  
+  it "email should be unique up to case" do
+        upcased_email = @attr[:email].upcase
+        User.create!(@attr.merge(:email => upcased_email))
+        user_with_duplicate = User.new(@attr)
+        user_with_duplicate.should_not be_valid
+      end
+  
 end
